@@ -305,18 +305,21 @@
         }
         .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
 
-        /* 📱 核心修改：針對手機端的響應式調整 */
+        /* 📱 手機端響應式排版優化 */
         @media (max-width: 968px) {
-            /* 壓縮卡片面板高度，給按鈕留出空間 */
-            .glass-selector-panel { grid-template-columns: 1fr; width: 85%; bottom: 15px; gap: 8px; }
-            .glass-card { padding: 12px; }
-            .glass-card-img { width: 48px; height: 48px; } /* 縮小圖片節省垂直高度 */
+            /* 1. 調整卡片間距，不要那麼緊湊 */
+            .glass-selector-panel { grid-template-columns: 1fr; width: 85%; bottom: 35px; gap: 16px; }
+            /* 2. 統一形狀為膠囊狀 (Pill)，與 WATCH TOUR 保持一致 */
+            .glass-card { padding: 12px 16px; border-radius: var(--radius-pill); }
+            /* 配合膠囊形狀，將內部小圖改為圓形 */
+            .glass-card-img { width: 44px; height: 44px; border-radius: 50%; }
             
-            /* 將居中文字與按鈕整體往上移，徹底解決重疊問題 */
+            /* 3. 將上方標題與 WATCH TOUR 按鈕大幅上提，拉開距離 */
+            .cover-content { margin-top: -35vh; }
             .cover-title { font-size: 20vw; margin-bottom: 8px; }
-            .cover-subtitle { font-size: 14px; margin-bottom: 24px; } 
-            .cover-content { margin-top: -35vh; } /* 往上提！ */
+            .cover-subtitle { font-size: 14px; margin-bottom: 24px; }
 
+            /* 其他原有手機端樣式保持不變 */
             .knowledge-grid { grid-template-columns: 1fr; }
             .modal-body { padding: 24px 20px; }
             .modal-header { height: 220px; }
@@ -541,7 +544,7 @@
                     ` 
                 },
                 { 
-                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg', 
+                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://github.com/user-attachments/assets/315d3a09-590c-4ab2-8b18-89c330a05de2', 
                     content: `
                         <p>客家飲食以「粗糧細作」著稱，講究食材的原味和保存技術。由於客家人多居住山區，食材以雜糧、豆類、醃製品為主，發展出獨特的「釀」菜文化和茶果傳統。</p>
                         <h3>茶果文化</h3>
