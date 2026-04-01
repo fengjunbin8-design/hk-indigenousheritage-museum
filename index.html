@@ -305,10 +305,18 @@
         }
         .fade-up { animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
 
+        /* 📱 核心修改：針對手機端的響應式調整 */
         @media (max-width: 968px) {
-            .glass-selector-panel { grid-template-columns: 1fr; width: 85%; bottom: 20px; gap: 10px; }
-            .glass-card { padding: 16px; }
-            .cover-title { font-size: 20vw; }
+            /* 壓縮卡片面板高度，給按鈕留出空間 */
+            .glass-selector-panel { grid-template-columns: 1fr; width: 85%; bottom: 15px; gap: 8px; }
+            .glass-card { padding: 12px; }
+            .glass-card-img { width: 48px; height: 48px; } /* 縮小圖片節省垂直高度 */
+            
+            /* 將居中文字與按鈕整體往上移，徹底解決重疊問題 */
+            .cover-title { font-size: 20vw; margin-bottom: 8px; }
+            .cover-subtitle { font-size: 14px; margin-bottom: 24px; } 
+            .cover-content { margin-top: -35vh; } /* 往上提！ */
+
             .knowledge-grid { grid-template-columns: 1fr; }
             .modal-body { padding: 24px 20px; }
             .modal-header { height: 220px; }
@@ -571,7 +579,9 @@
                         <h3>新界山區的對唱傳統</h3>
                         <p>早期聚居在西貢、大埔、荃灣、沙田等新界山區的客家人，生活環境多為山林與丘陵。在斬柴、割草或農耕時，他們習慣隔著山頭以山歌「對駁」（對唱）。這種無需樂器伴奏的即興清唱，成為了他們抒發情感、交流信息的重要方式，展現了客家人在艱苦環境中的樂觀精神。</p>
                         <h3>抗日山歌與歷史見證</h3>
-                        <p>香港的客家山歌記錄了許多真實的本地歷史細節。例如，在二戰日佔時期，西貢一帶的客家人曾編唱「抗日山歌」，用隱晦的歌詞傳遞情報、鼓舞士氣，成為了東江縱隊港九獨立大隊抗戰歷史的珍貴聲音檔案。
+                        <p>香港的客家山歌記錄了許多真實的本地歷史細節。例如，在二戰日佔時期，西貢一帶的客家人曾編唱「抗日山歌」，用隱晦的歌詞傳遞情報、鼓舞士氣，成為了東江縱隊港九獨立大隊抗戰歷史的珍貴聲音檔案。</p>
+                        <h3>文化傳承的挑戰與保育</h3>
+                        <p>隨著香港的城市化，這門「水邊與山間的聽覺記憶」正面臨失傳的危機。如今，雖然能在山間唱響山歌的老人越來越少，但香港多個客家社團及學術機構正積極通過錄音存檔、開設培訓班等方式，努力將這份獨特的本土文化遺產傳承給年輕一代。</p>
                     ` 
                 },
                 { 
