@@ -85,13 +85,25 @@
             font-size: 16px; font-weight: 700; color: white;
             display: flex; align-items: center; gap: 12px; cursor: pointer; transition: color 0.3s;
         }
-        .navbar.scrolled .logo { color: var(--current-primary); }
+        
+        /* 統一的毛玻璃 Logo 圖標樣式 */
         .logo-icon {
-            width: 32px; height: 32px; background: white; border-radius: 50%;
+            width: 32px; height: 32px;
+            background: rgba(255, 255, 255, 0.15); 
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); 
+            border: 1px solid rgba(255, 255, 255, 0.25); 
+            border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            color: black; font-size: 14px; transition: var(--transition-fast);
+            color: white; 
+            font-size: 14px;
+            transition: var(--transition-fast);
         }
-        .navbar.scrolled .logo-icon { background: var(--current-primary); color: white; }
+        .navbar.scrolled .logo-icon {
+            background: rgba(255, 255, 255, 0.4); 
+            backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(0, 0, 0, 0.08); 
+            color: var(--current-primary); 
+        }
         
         /* Logo 下拉面板樣式 */
         .logo-dropdown {
@@ -214,8 +226,30 @@
 
         /* 內容區域 */
         .content-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-        .section-header { margin-bottom: 60px; text-align: center; }
+        .section-header { margin-bottom: 30px; text-align: center; } 
         .section-title { font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
+
+        /* 百科簡介區塊樣式 */
+        .ethnic-intro {
+            max-width: 880px;
+            margin: 0 auto 50px;
+            text-align: center;
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text-gray);
+            padding: 32px 48px;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .ethnic-intro.fade-out {
+            opacity: 0;
+            transform: translateY(10px);
+        }
         
         /* 統一的毛玻璃過濾導航 */
         .culture-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
@@ -252,7 +286,7 @@
         .knowledge-card-tag {
             align-self: flex-start; padding: 6px 16px; border-radius: var(--radius-pill);
             background: var(--current-accent); color: var(--current-primary);
-            font-size: 11px; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.5px;
+            font-size: 11px; font-weight: 600; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.5px;
         }
         .knowledge-card-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); line-height: 1.3;}
         .knowledge-card-excerpt { font-size: 15px; color: var(--text-gray); line-height: 1.6; }
@@ -307,19 +341,22 @@
 
         /* 📱 手機端響應式排版優化 */
         @media (max-width: 968px) {
-            /* 1. 調整卡片間距，不要那麼緊湊 */
             .glass-selector-panel { grid-template-columns: 1fr; width: 85%; bottom: 35px; gap: 16px; }
-            /* 2. 統一形狀為膠囊狀 (Pill)，與 WATCH TOUR 保持一致 */
             .glass-card { padding: 12px 16px; border-radius: var(--radius-pill); }
-            /* 配合膠囊形狀，將內部小圖改為圓形 */
             .glass-card-img { width: 44px; height: 44px; border-radius: 50%; }
             
-            /* 3. 將上方標題與 WATCH TOUR 按鈕大幅上提，拉開距離 */
             .cover-content { margin-top: -35vh; }
             .cover-title { font-size: 20vw; margin-bottom: 8px; }
             .cover-subtitle { font-size: 14px; margin-bottom: 24px; }
 
-            /* 其他原有手機端樣式保持不變 */
+            /* 百科簡介區塊手機端適配 */
+            .ethnic-intro {
+                padding: 24px;
+                font-size: 14px;
+                text-align: left;
+                margin-bottom: 40px;
+            }
+
             .knowledge-grid { grid-template-columns: 1fr; }
             .modal-body { padding: 24px 20px; }
             .modal-header { height: 220px; }
@@ -334,7 +371,6 @@
     <nav class="navbar" id="navbar">
         <div class="logo" onclick="toggleLogoMenu(event)">
             <div class="logo-icon">港</div>
-            <span>HK HERITAGE</span>
         </div>
         
         <div class="logo-dropdown" id="logo-dropdown" onclick="event.stopPropagation()">
@@ -342,13 +378,6 @@
             <p style="font-size: 13px; color: var(--text-gray); margin-bottom: 16px; line-height: 1.6;">
                 致力於保存與展示香港瀕危的非物質文化遺產，重塑人與地景的記憶。
             </p>
-            
-            <div style="margin-bottom: 16px; padding: 14px; background: rgba(0,0,0,0.03); border-radius: 8px; border-left: 3px solid var(--current-primary);">
-                <p style="font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 6px;">免責聲明與內容共創 (Disclaimer & Co-creation)</p>
-                <p style="font-size: 12px; color: var(--text-gray); line-height: 1.6; margin: 0;">
-                    本數字檔案館仍處於持續擴充與修訂階段。由於本土文化的廣博與深厚，目前的收錄尚無法涵蓋全貌，部分文獻或學術表述亦難免存在疏漏與未盡完善之處。我們誠摯邀請各界學者、原居民及文化愛好者不吝指正。若您發現任何錯誤或有寶貴的補充資料，歡迎隨時與我們聯繫探討。
-                </p>
-            </div>
 
             <div style="font-size: 12px; font-weight: 600; color: var(--text-dark); margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.05);">
                 館藏：3 大民系 · 15 份文化切片
@@ -411,6 +440,8 @@
                 <h2 class="section-title">Cultural Exploration</h2>
             </div>
             
+            <div class="ethnic-intro" id="ethnic-intro"></div>
+            
             <nav class="culture-nav">
                 <button class="tab-btn active" onclick="filterContent('all', this)">全部 All</button>
                 <button class="tab-btn" onclick="filterContent('ARCHITECTURE', this)">建築民居 Architecture</button>
@@ -470,9 +501,24 @@
     <script>
         // --- 核心數據 ---
         const coverData = {
-            waitau: { title: 'WAITAU', sub: '圍頭人 · 新界五大氏族', img: 'https://kimi-web-img.moonshot.cn/img/www.amo.gov.hk/ddb437d8ef338f507adb61cdda5582f52490b908.jpg' },
-            hakka: { title: 'HAKKA', sub: '客家人 · 百年山地農耕文明', img: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg' }, 
-            tanka: { title: 'TANKA', sub: '疍家人 · 浮生江海的水上民族', img: 'https://kimi-web-img.moonshot.cn/img/static01.nyt.com/a5301cd5af2ae842ee602c59894c967285558bb8.jpg' }
+            waitau: { 
+                title: 'WAITAU', 
+                sub: '圍頭人 · 新界五大氏族', 
+                img: 'https://kimi-web-img.moonshot.cn/img/www.amo.gov.hk/ddb437d8ef338f507adb61cdda5582f52490b908.jpg',
+                intro: '圍頭人是香港新界最早的定居者之一，其歷史可追溯至宋元時期。著名的「新界五大氏族」（鄧、侯、彭、文、廖）皆屬圍頭人。由於較早南遷，他們佔據了新界最肥沃的平原與谷地（如元朗、上水一帶），以務農為生。為防禦海盜與盜賊，他們建立了四周環繞青磚高牆的「圍村」，形成了極具防禦性且極重宗族血脈的在地文化。'
+            },
+            hakka: { 
+                title: 'HAKKA', 
+                sub: '客家人 · 百年山地農耕文明', 
+                img: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg',
+                intro: '客家人是香港另一大重要民系，主要在清朝「復界」後（約兩三百年前）大量遷入。由於當時肥沃的平原多已被圍頭人開墾，客家先民只能向偏遠的山區和丘陵地帶（如西貢、大埔、荃灣等）發展。他們開山劈石、修築梯田，以堅韌的毅力在惡劣環境中紮根，發展出獨特的山地農耕文明、圍屋建築以及代代相傳的客家山歌。'
+            }, 
+            tanka: { 
+                title: 'TANKA', 
+                sub: '疍家人 · 浮生江海的水上民族', 
+                img: 'https://kimi-web-img.moonshot.cn/img/static01.nyt.com/a5301cd5af2ae842ee602c59894c967285558bb8.jpg',
+                intro: '疍家人（又稱水上人）是香港最早期的原居民之一，世代以舟為家，以捕魚為生，活動於香港的各個避風塘與海灣（如大澳、香港仔）。他們不事農桑，擁有獨特的水上生活哲學，建造了適應潮汐的「水上棚屋」，並孕育出以歌代話的「鹹水歌」文化。疍家人的歷史，生動地縮影了香港從傳統漁港走向現代都市的滄桑巨變。'
+            }
         };
 
         const contentData = {
@@ -544,7 +590,7 @@
                     ` 
                 },
                 { 
-                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://github.com/user-attachments/assets/315d3a09-590c-4ab2-8b18-89c330a05de2', 
+                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg', 
                     content: `
                         <p>客家飲食以「粗糧細作」著稱，講究食材的原味和保存技術。由於客家人多居住山區，食材以雜糧、豆類、醃製品為主，發展出獨特的「釀」菜文化和茶果傳統。</p>
                         <h3>茶果文化</h3>
@@ -693,11 +739,19 @@
             const bgImg = document.getElementById('cover-bg-img');
             bgImg.style.opacity = 0; 
             
+            const introEl = document.getElementById('ethnic-intro');
+            if(introEl) introEl.classList.add('fade-out');
+
             setTimeout(() => {
                 document.getElementById('cover-title').textContent = coverData[ethnic].title;
                 document.getElementById('cover-subtitle').textContent = coverData[ethnic].sub;
                 bgImg.src = coverData[ethnic].img;
                 
+                if(introEl) {
+                    introEl.innerHTML = coverData[ethnic].intro;
+                    introEl.classList.remove('fade-out');
+                }
+
                 bgImg.onload = () => {
                     bgImg.style.transform = 'scale(1)';
                     bgImg.style.opacity = 0.8;
@@ -793,6 +847,9 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
+            const introEl = document.getElementById('ethnic-intro');
+            if(introEl) introEl.innerHTML = coverData['waitau'].intro;
+
             renderContent();
             setTimeout(() => document.getElementById('cover-bg-img').style.transform = 'scale(1.05)', 50);
         });
