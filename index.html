@@ -294,8 +294,10 @@
         .knowledge-card:hover { 
             transform: translateY(-10px); background: #ffffff; box-shadow: 0 20px 45px rgba(0,0,0,0.08); 
         }
+        
+        /* ✨ 修復了圖片圓角導致的空隙問題 */
         .knowledge-card-image {
-            width: 100%; height: 260px; object-fit: cover; border-radius: 20px; margin-bottom: 24px; transition: var(--transition-slow);
+            width: 100%; height: 100%; object-fit: cover; transition: var(--transition-slow); display: block;
         }
         .knowledge-card:hover .knowledge-card-image { transform: scale(1.02); }
         .knowledge-card-body { padding: 0 12px 12px; flex: 1; display: flex; flex-direction: column; }
@@ -306,16 +308,6 @@
         }
         .knowledge-card-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); line-height: 1.3;}
         .knowledge-card-excerpt { font-size: 15px; color: var(--text-gray); line-height: 1.6; }
-
-        /* 卡片底部的微交互提示 */
-        .card-action {
-            margin-top: auto; padding-top: 16px; font-size: 13px; font-weight: 600;
-            color: var(--current-primary); display: flex; align-items: center;
-            opacity: 0.7; transition: var(--transition-fast);
-        }
-        .card-action .arrow { margin-left: 4px; transition: transform 0.3s ease; }
-        .knowledge-card:hover .card-action { opacity: 1; }
-        .knowledge-card:hover .card-action .arrow { transform: translateX(6px); }
 
         /* 全屏彈窗 */
         .modal-overlay {
@@ -617,7 +609,7 @@
                     ` 
                 },
                 { 
-                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://github.com/user-attachments/assets/315d3a09-590c-4ab2-8b18-89c330a05de2', 
+                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg', 
                     content: `
                         <p>客家飲食以「粗糧細作」著稱，講究食材的原味和保存技術。由於客家人多居住山區，食材以雜糧、豆類、醃製品為主，發展出獨特的「釀」菜文化和茶果傳統。</p>
                         <h3>茶果文化</h3>
@@ -829,7 +821,6 @@
                         <span class="knowledge-card-tag">${item.tag}</span>
                         <h3 class="knowledge-card-title">${item.title}</h3>
                         <p class="knowledge-card-excerpt">${item.excerpt}</p>
-                        <div class="card-action">閱讀展品 <span class="arrow">→</span></div>
                     </div>
                 `;
                 
