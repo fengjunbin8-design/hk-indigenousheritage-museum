@@ -178,6 +178,8 @@
         }
         
         .cover-content { text-align: center; z-index: 10; margin-top: -10vh; }
+        
+        /* Hero Section 價值主張與優化 */
         .cover-title {
             font-family: 'Montserrat', sans-serif;
             font-size: clamp(60px, 16vw, 220px); font-weight: 900; color: white; line-height: 1; letter-spacing: 0.02em;
@@ -226,8 +228,13 @@
 
         /* 內容區域 */
         .content-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
-        .section-header { margin-bottom: 30px; text-align: center; } 
-        .section-title { font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
+        .section-header { margin-bottom: 40px; text-align: center; } 
+        .section-title { font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; }
+        
+        /* 全局背景引導說明 */
+        .section-desc {
+            font-size: 16px; color: var(--text-gray); max-width: 600px; margin: 0 auto; line-height: 1.6;
+        }
 
         /* 百科簡介區塊樣式 */
         .ethnic-intro {
@@ -267,6 +274,15 @@
             background: var(--current-primary); color: white; border-color: var(--current-primary);
             box-shadow: 0 12px 30px rgba(0,0,0,0.15); transform: translateY(-3px);
         }
+        
+        /* 為活動按鈕 (如返回首頁) 增加懸停放大與點擊效果 */
+        .tab-btn.active:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+        }
+        .tab-btn.active:active {
+            transform: translateY(-1px) scale(0.98);
+        }
 
         /* 知識網格與卡片動效 */
         .knowledge-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 40px; }
@@ -290,6 +306,16 @@
         }
         .knowledge-card-title { font-size: 22px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); line-height: 1.3;}
         .knowledge-card-excerpt { font-size: 15px; color: var(--text-gray); line-height: 1.6; }
+
+        /* 卡片底部的微交互提示 */
+        .card-action {
+            margin-top: auto; padding-top: 16px; font-size: 13px; font-weight: 600;
+            color: var(--current-primary); display: flex; align-items: center;
+            opacity: 0.7; transition: var(--transition-fast);
+        }
+        .card-action .arrow { margin-left: 4px; transition: transform 0.3s ease; }
+        .knowledge-card:hover .card-action { opacity: 1; }
+        .knowledge-card:hover .card-action .arrow { transform: translateX(6px); }
 
         /* 全屏彈窗 */
         .modal-overlay {
@@ -321,9 +347,9 @@
         
         .modal-body { padding: 56px; overflow-y: auto; }
         
-        /* 彈窗富文本排版 */
+        /* 彈窗富文本排版 (優化閱讀體驗) */
         .modal-body h2 { font-size: 38px; font-weight: 800; margin-bottom: 32px; color: var(--text-dark); line-height: 1.2; letter-spacing: -0.5px; }
-        .modal-content-html p { font-size: 16px; color: var(--text-gray); line-height: 1.8; margin-bottom: 24px; letter-spacing: 0.2px; }
+        .modal-content-html p { font-size: 17px; color: #333; line-height: 1.9; margin-bottom: 28px; letter-spacing: 0.3px; }
         .modal-content-html h3 { font-size: 22px; font-weight: 700; color: var(--current-primary); margin: 48px 0 16px; line-height: 1.4; }
 
         /* 關於頁面 */
@@ -407,7 +433,7 @@
             <div class="cover-content">
                 <h1 class="cover-title" id="cover-title">WAITAU</h1>
                 <p class="cover-subtitle" id="cover-subtitle">圍頭人 · 新界五大氏族</p>
-                <button class="cover-btn" onclick="scrollToExplore()">WATCH TOUR</button>
+                <button class="cover-btn" onclick="scrollToExplore()">進入展廳 EXPLORE</button>
             </div>
 
             <div class="glass-selector-panel">
@@ -437,7 +463,8 @@
 
         <section class="content-section" id="explore">
             <div class="section-header">
-                <h2 class="section-title">Cultural Exploration</h2>
+                <h2 class="section-title">文化展廳 Exhibition</h2>
+                <p class="section-desc">探索香港三大原住民的建築、飲食、習俗與地景記憶，重構被遺忘的非遺版圖。</p>
             </div>
             
             <div class="ethnic-intro" id="ethnic-intro"></div>
@@ -536,16 +563,6 @@
                     ` 
                 },
                 { 
-                    id: 2, category: 'CUSTOMS', tag: 'CUSTOMS', title: '太平清醮與宗族祭祀', excerpt: '十年一屆的太平清醮是圍頭社區最重要的宗教活動...', image: 'https://github.com/user-attachments/assets/a3e7783d-91ba-427d-85cc-ebe72c864ee2', 
-                    content: `
-                        <p>太平清醮是圍頭人（本地圍村人）最盛大的傳統節慶，通常每十年舉行一次，旨在酬謝神恩、超度亡魂、潔淨社區。這一傳統可追溯至明清時期，體現了圍頭人深厚的宗族觀念和社區凝聚力。</p>
-                        <h3>儀式流程</h3>
-                        <p>整個醮會持續數日，包括「建醮」（搭建醮棚）、「開壇」（道士誦經）、「水祭」（超度水亡魂）、「火祭」（驅邪）等環節。期間全村齋戒，戲班演出「神功戲」，但不演粵劇而演白字戲或木偶戲，以示對神靈的尊敬。</p>
-                        <h3>宗族組織</h3>
-                        <p>圍頭社會以宗族為核心，祠堂是權力中心。族長由輩分最高、年齡最長者擔任，負責調解糾紛、管理族產、組織祭祀。族譜記載嚴謹，重視血脈傳承，體現了儒家倫理在鄉村社會的實踐。</p>
-                    ` 
-                },
-                { 
                     id: 3, category: 'FOOD', tag: 'FOOD', title: '圍村盆菜與節慶美食', excerpt: '一鍋匯聚山珍海味的圍村盆菜，象徵宗族團結...', image: 'https://github.com/user-attachments/assets/0e78e7b0-6015-46a8-a70d-354f2a06ea55', 
                     content: `
                         <p>圍村盆菜是圍頭飲食文化的巔峰之作，起源於南宋末年。傳說宋帝昺逃難至香港，村民以木盆盛載家中最好的食物招待，遂成傳統。這道菜式體現了圍頭人「食在圍內」的集體主義精神。</p>
@@ -556,13 +573,13 @@
                     ` 
                 },
                 { 
-                    id: 4, category: 'LANDSCAPES', tag: 'LANDSCAPES', title: '圍村空間佈局演變', excerpt: '從防禦性聚落到現代化社區的空間轉型...', image: 'https://github.com/user-attachments/assets/d79a0736-ce3f-483e-a989-e67d1149dc8f', 
+                    id: 2, category: 'CUSTOMS', tag: 'CUSTOMS', title: '太平清醮與宗族祭祀', excerpt: '十年一屆的太平清醮是圍頭社區最重要的宗教活動...', image: 'https://github.com/user-attachments/assets/a3e7783d-91ba-427d-85cc-ebe72c864ee2', 
                     content: `
-                        <p>圍村的空間佈局經歷了從封閉防禦到開放融合的演變過程。傳統圍村以祠堂為中心，房屋圍繞中心廣場呈同心圓或方格狀排列，體現了「向心式」的宗族社會結構。</p>
-                        <h3>傳統佈局</h3>
-                        <p>典型圍村如錦田吉慶圍、粉嶺龍躍頭，採用「前祠後居」或「中祠旁居」佈局。祠堂位於中軸線上，面向正門，象徵祖先守護後代。房屋排列緊密，巷道狹窄，便於防禦且節省土地。</p>
-                        <h3>現代轉型</h3>
-                        <p>隨著城市化進程，許多圍村向外擴展，形成「舊圍」與「新村」並存的格局。丁屋政策（小型屋宇政策）導致圍村周邊出現大量三層丁屋，改變了原有的低密度景觀。然而，圍牆、祠堂和風水林通常被保留下來，成為社區認同的象徵。</p>
+                        <p>太平清醮是圍頭人（本地圍村人）最盛大的傳統節慶，通常每十年舉行一次，旨在酬謝神恩、超度亡魂、潔淨社區。這一傳統可追溯至明清時期，體現了圍頭人深厚的宗族觀念和社區凝聚力。</p>
+                        <h3>儀式流程</h3>
+                        <p>整個醮會持續數日，包括「建醮」（搭建醮棚）、「開壇」（道士誦經）、「水祭」（超度水亡魂）、「火祭」（驅邪）等環節。期間全村齋戒，戲班演出「神功戲」，但不演粵劇而演白字戲或木偶戲，以示對神靈的尊敬。</p>
+                        <h3>宗族組織</h3>
+                        <p>圍頭社會以宗族為核心，祠堂是權力中心。族長由輩分最高、年齡最長者擔任，負責調解糾紛、管理族產、組織祭祀。族譜記載嚴謹，重視血脈傳承，體現了儒家倫理在鄉村社會的實踐。</p>
                     ` 
                 },
                 { 
@@ -573,6 +590,16 @@
                         <p>圍頭人將社壇設於圍門之外或入口玄關處，作為村落的第一道防線。這種空間佈局不僅具有風水上的「聚氣」作用，更象徵著土地神日夜把守村落大門，是傳統防禦性聚落文化在精神層面的延伸。</p>
                         <h3>農曆二月土地誕</h3>
                         <p>每年農曆二月初二的「土地誕」（又稱社日），是圍村極為看重的傳統節慶。這一天，村民會齊聚社壇前，準備豐盛的燒豬、雞、鮮花與香燭進行祭祀。許多圍村還會藉此機會舉辦「食盆」（吃盆菜）活動，甚至舉行競投福物（如花炮）的儀式，藉此凝聚宗族感情，祈求來年丁財兩旺。</p>
+                    ` 
+                },
+                { 
+                    id: 4, category: 'LANDSCAPES', tag: 'LANDSCAPES', title: '圍村空間佈局演變', excerpt: '從防禦性聚落到現代化社區的空間轉型...', image: 'https://github.com/user-attachments/assets/d79a0736-ce3f-483e-a989-e67d1149dc8f', 
+                    content: `
+                        <p>圍村的空間佈局經歷了從封閉防禦到開放融合的演變過程。傳統圍村以祠堂為中心，房屋圍繞中心廣場呈同心圓或方格狀排列，體現了「向心式」的宗族社會結構。</p>
+                        <h3>傳統佈局</h3>
+                        <p>典型圍村如錦田吉慶圍、粉嶺龍躍頭，採用「前祠後居」或「中祠旁居」佈局。祠堂位於中軸線上，面向正門，象徵祖先守護後代。房屋排列緊密，巷道狹窄，便於防禦且節省土地。</p>
+                        <h3>現代轉型</h3>
+                        <p>隨著城市化進程，許多圍村向外擴展，形成「舊圍」與「新村」並存的格局。丁屋政策（小型屋宇政策）導致圍村周邊出現大量三層丁屋，改變了原有的低密度景觀。然而，圍牆、祠堂和風水林通常被保留下來，成為社區認同的象徵。</p>
                     ` 
                 }
             ],
@@ -590,7 +617,7 @@
                     ` 
                 },
                 { 
-                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.i-scmp.com/869f3277fbc761f3cf63bd37470f3466bbbab777.jpg', 
+                    id: 6, category: 'FOOD', tag: 'FOOD', title: '客家茶果與釀豆腐', excerpt: '粗糧細作的客家飲食哲學，茶果與釀製工藝...', image: 'https://github.com/user-attachments/assets/315d3a09-590c-4ab2-8b18-89c330a05de2', 
                     content: `
                         <p>客家飲食以「粗糧細作」著稱，講究食材的原味和保存技術。由於客家人多居住山區，食材以雜糧、豆類、醃製品為主，發展出獨特的「釀」菜文化和茶果傳統。</p>
                         <h3>茶果文化</h3>
@@ -663,16 +690,6 @@
                     ` 
                 },
                 { 
-                    id: 11, category: 'CUSTOMS', tag: 'CUSTOMS', title: '鹹水歌與婚嫁儀式', excerpt: '以歌代話的疍家傳統，水上婚禮的獨特習俗...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.orangenews.hk/63a49ce13c29a34c5129d7807dcf4ad3d8b6e33f.jpg', 
-                    content: `
-                        <p>鹹水歌（Saltwater Songs）是疍家人的傳統民歌，因在鹹淡水交匯處演唱而得名。這種民歌形式與廣府「漁歌」不同，具有獨特的旋律和演唱方式，是疍家文化最重要的非物質遺產。</p>
-                        <h3>歌俗傳統</h3>
-                        <p>疍家人「以歌代話」，無論是勞動、戀愛、婚嫁、祭祀都伴隨歌聲。鹹水歌多為男女對唱，採用「嘆」的方式（即即興演唱），旋律悠長婉轉，帶有濃厚的鼻音和顫音。歌詞多為七言四句，內容涉及捕魚生活、愛情追求、歷史傳說等。</p>
-                        <h3>水上婚禮</h3>
-                        <p>傳統疍家婚禮全程在船上進行。迎親時，新郎乘船至新娘船前，以歌聲「請妻」，新娘以歌回應。新娘出嫁時要「哭嫁」，唱出對娘家的不捨。婚禮中有「過火盆」、「拜甲板」等儀式，象徵從水上生活過渡到婚姻生活。婚宴稱為「船酌」，親友各駕小艇聚於主船周圍，以歌助興。</p>
-                    ` 
-                },
-                { 
                     id: 12, category: 'FOOD', tag: 'FOOD', title: '海鮮風乾與蝦醬工藝', excerpt: '大澳特產蝦醬與鹹魚的傳統製作技藝...', image: 'https://kimi-web-img.moonshot.cn/img/www.chunghwabook.com.hk/6af2936f916ecf0a166afc97946fee2ca85e11d8.jpeg', 
                     content: `
                         <p>大澳被譽為「香港威尼斯」，也是香港最後的傳統漁港之一。這裡的特產蝦醬、鹹魚、花膠等海產加工品，承載著疍家人「靠海吃海」的飲食智慧，部分製作技藝已列入非物質文化遺產。</p>
@@ -680,6 +697,16 @@
                         <p>大澳蝦醬以「銀蝦」（一種小型浮游蝦）為原料，加入海鹽發酵而成。傳統製作需經「曬蝦」、「磨蝦」、「發酵」三道工序。新鮮銀蝦洗淨後平鋪於竹籮曝曬，待半乾時放入石臼研磨成醬，再加入適量鹽巴，裝入瓦罈發酵三個月。優質蝦醬呈紫紅色，香氣濃郁，是粵菜的重要調味料。</p>
                         <h3>鹹魚分級</h3>
                         <p>大澳鹹魚以「梅香鹹魚」最為著名，採用「酶香」技術——利用魚體自身酶和微生物發酵，產生獨特香氣。這種技術需精確控制鹽度和溫度，經驗至關重要。鹹魚分為「實肉」和「梅香」兩大類，前者口感結實，後者香氣濃烈，各有擁躉。</p>
+                    ` 
+                },
+                { 
+                    id: 11, category: 'CUSTOMS', tag: 'CUSTOMS', title: '鹹水歌與婚嫁儀式', excerpt: '以歌代話的疍家傳統，水上婚禮的獨特習俗...', image: 'https://kimi-web-img.moonshot.cn/img/cdn.orangenews.hk/63a49ce13c29a34c5129d7807dcf4ad3d8b6e33f.jpg', 
+                    content: `
+                        <p>鹹水歌（Saltwater Songs）是疍家人的傳統民歌，因在鹹淡水交匯處演唱而得名。這種民歌形式與廣府「漁歌」不同，具有獨特的旋律和演唱方式，是疍家文化最重要的非物質遺產。</p>
+                        <h3>歌俗傳統</h3>
+                        <p>疍家人「以歌代話」，無論是勞動、戀愛、婚嫁、祭祀都伴隨歌聲。鹹水歌多為男女對唱，採用「嘆」的方式（即即興演唱），旋律悠長婉轉，帶有濃厚的鼻音和顫音。歌詞多為七言四句，內容涉及捕魚生活、愛情追求、歷史傳說等。</p>
+                        <h3>水上婚禮</h3>
+                        <p>傳統疍家婚禮全程在船上進行。迎親時，新郎乘船至新娘船前，以歌聲「請妻」，新娘以歌回應。新娘出嫁時要「哭嫁」，唱出對娘家的不捨。婚禮中有「過火盆」、「拜甲板」等儀式，象徵從水上生活過渡到婚姻生活。婚宴稱為「船酌」，親友各駕小艇聚於主船周圍，以歌助興。</p>
                     ` 
                 },
                 { 
@@ -802,6 +829,7 @@
                         <span class="knowledge-card-tag">${item.tag}</span>
                         <h3 class="knowledge-card-title">${item.title}</h3>
                         <p class="knowledge-card-excerpt">${item.excerpt}</p>
+                        <div class="card-action">閱讀展品 <span class="arrow">→</span></div>
                     </div>
                 `;
                 
